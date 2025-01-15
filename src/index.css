@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dark {
+    background-color: #111827; /* Equivalent to gray-900 */
+    opacity: 1;
+    color: white;
+}
+  
+
