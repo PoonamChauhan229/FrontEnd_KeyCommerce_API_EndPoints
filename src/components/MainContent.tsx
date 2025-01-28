@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom"; // Import Route and Routes for routing
 import Home from "../Pages/Home";
-import About from "../Pages/About";
 import Product from "./Products/Products";
 import GetProductList from './Products/GetProductList'
 import Cart from "./Cart/Cart";
@@ -34,19 +33,18 @@ import FilterLimitSkipDesc from "./Paginate/FilterLimitSkipDesc";
 import FilterLimitSkipAsc from "./Paginate/FilterLimitSkipAsc";
 import FilterCatLimitSkipDesc from "./Paginate/FilterCatLimitSkipDesc";
 import FilterCatLimitSkipAsc from "./Paginate/FilterCatLimitSkipAsc";
-import ApiKey from "./ApiKey/APIKey";
 import GenerateApiKey from "./ApiKey/GenerateApiKey";
 import Category from "./Category/Category";
 import GetAllCategory from "./Category/GetAllCategory";
 import GetProductsCategory from "./Category/GetProductsCategory";
+import ApiKey from "./ApiKey/ApiKey";
 
 const MainContent: React.FC = () => {
   return (
     <div className=""> {/* Main content area */}
       <Routes> {/* Routing happens here */}
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
         
+      <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/getcart" element={<GetCart />} />
