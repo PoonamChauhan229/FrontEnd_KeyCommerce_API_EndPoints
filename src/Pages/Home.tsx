@@ -3,7 +3,7 @@ import React from "react";
 const Home: React.FC = () => {
   return (
    <>
-     <div className="max-w-4xl mx-auto p-2 bg-gray-900 text-white rounded-lg shadow-lg ">
+     <div className="max-w-4xl mx-auto p-2 bg-gray-900 text-white rounded-lg shadow-lg  mt-7">
         
         <p className="text-base mb-6">
           KeyCommerce provides a comprehensive set of RESTful services for managing an e-commerce platform. It includes endpoints for handling products, carts, user management, categories, and secure API key operations. The API supports pagination for better data handling and performance. Designed for flexibility, it allows seamless integration for developers building e-commerce solutions.

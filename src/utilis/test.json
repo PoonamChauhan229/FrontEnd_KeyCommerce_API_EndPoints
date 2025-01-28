@@ -1,0 +1,157 @@
+{
+    "sections": [
+      {
+        "sectionTitle": "Products",
+        "sectionDescription": "section provides a comprehensive API for managing product-related operations in the KeyCommerce platform. Users can create, retrieve, update, and delete products with secure API key authentication.",
+        "endpoints": [
+          {
+            "title": "Get Products List",
+            "description": "This endpoint allows users to retrieve all available products from the KeyCommerce platform. A valid API key is required for secure access.",
+            "method": "GET",
+            "url": "https://keycommerce-api.onrender.com/user/products",
+            "apiKeyRequired": true,
+            "borderColor": "border-blue-500",
+            "headers": {
+              "Authorization": "Bearer <your-api-key>",
+              "Content-Type": "application/json"
+            },
+            "responseExample": [
+                {
+                    "statusCode": "2}00 OK",
+                    "message":"Returns a list of products",
+                },
+                {
+                    "statusCode": "401 Unauthorized",
+                    "message":"Missing or invalid API key",
+                }
+        ],
+        "responseFeilds":{
+            
+        },
+              "data": [
+                {
+                  "id": "123",
+                  "name": "Product Name",
+                  "price": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "title": "Add a New Product",
+            "description": "This endpoint allows users to add a new product to the KeyCommerce platform. A valid API key is required for secure access.",
+            "method": "POST",
+            "url": "https://keycommerce-api.onrender.com/user/products",
+            "borderColor": "border-teal-400",
+            "headers": {
+              "Authorization": "Bearer <your-api-key>",
+              "Content-Type": "application/json"
+            },
+            "requestExample": {
+              "name": "New Product",
+              "description": "Product description",
+              "price": 49.99,
+              "category": "Category Name"
+            },
+            "responseExample": {
+              "statusCode": 201,
+              "message": "Product created successfully!",
+              "data": {
+                "id": "124",
+                "name": "New Product"
+              }
+            }
+          },
+          {
+            "title": "Update Product",
+            "description": "This endpoint allows users to update an existing product's details using its unique ID. A valid API key is required for secure access.",
+            "method": "PUT",
+            "url": "https://keycommerce-api.onrender.com/user/products/{product_id}",
+            "apiKeyRequired": true,
+            "borderColor": "border-purple-400",
+            "headers": {
+              "Authorization": "Bearer <your-api-key>",
+              "Content-Type": "application/json"
+            },
+            "params": {
+              "product_id": "Unique ID of the product to update"
+            },
+            "requestExample": {
+              "name": "Updated Product",
+              "price": 79.99
+            },
+            "responseExample": {
+              "statusCode": 200,
+              "message": "Product updated successfully!"
+            }
+          },
+          {
+            "title": "Delete Product",
+            "description": "This endpoint allows users to delete a product using its unique ID. A valid API key is required for secure access.",
+            "method": "DELETE",
+            "url": "https://keycommerce-api.onrender.com/user/products/{product_id}",
+            "apiKeyRequired": true,
+            "borderColor": "border-red-500",
+            "headers": {
+              "Authorization": "Bearer <your-api-key>",
+              "Content-Type": "application/json"
+            },
+            "params": {
+              "product_id": "Unique ID of the product to delete"
+            },
+            "responseExample": {
+              "statusCode": 200,
+              "message": "Product deleted successfully!"
+            }
+          }
+        ]
+      },
+      {
+        "sectionTitle": "Cart",
+        "sectionDescription": "section provides endpoints to manage user carts, including adding items, retrieving cart details, and clearing the cart.",
+        "endpoints": [
+          {
+            "title": "Get Cart Details",
+            "description": "The Get Cart endpoint allows users to retrieve the details of all products currently in their shopping cart. A valid API key is required to access this endpoint.",
+            "method": "GET",
+            "url": "https://keycommerce-api.onrender.com/user/getcart",
+            "borderColor": "border-blue-500",
+            "headers": {
+              "Authorization": "Bearer <your-api-key>"
+            },
+            "responseExample": {
+              "statusCode": 200,
+              "cart": [
+                {
+                  "product_id": "123",
+                  "name": "Product Name",
+                  "quantity": 2,
+                  "price": 99.99
+                }
+              ]
+            }
+          },
+          {
+            "title": "Add Item to Cart",
+            "description": "This endpoint allows users to add a product to their shopping cart. If the product already exists in the cart, the endpoint will update the quantity of the product instead of adding a duplicate entry. A valid API key is required for authentication.",
+            "method": "POST",
+            "url": "https://keycommerce-api.onrender.com/user/addcart",
+            "borderColor": "border-teal-400",
+            "headers": {
+              "Authorization": "Bearer <your-api-key>",
+              "Content-Type": "application/json"
+            },
+            "requestExample": {
+              "product_id": "123",
+              "quantity": 1
+            },
+            "responseExample": {
+              "statusCode": 200,
+              "message": "Item added to cart!"
+            }
+          }
+        ]
+      }
+    ]
+  }
+  

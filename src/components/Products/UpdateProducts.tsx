@@ -2,7 +2,7 @@ import React from "react";
 import apiData from "../../utilis/apiData.json"; // Importing the JSON data
 import EndpointDetailsTemplate from "../StructuredTemplates/EndpointTemplate"; // Import the template
 
-const GetProductList: React.FC = () => {
+const UpdateProducts: React.FC = () => {
   // Find the "Products" section in the sections array
   const productSection = apiData.sections.find((section) => section.sectionTitle === "Products");
 
@@ -12,9 +12,9 @@ const GetProductList: React.FC = () => {
 
   // Find the "Get Products List" endpoint within the "Products" section
   const getProductEndpoint = productSection.endpoints.find(
-    (endpoint) => endpoint.title === "Get Products List"
+    (endpoint) => endpoint.title === "Update Products"
   );
-
+  console.log(getProductEndpoint)
   if (!getProductEndpoint) {
     return <p className="text-red-500">No "Get Products List" endpoint found.</p>;
   }
@@ -35,4 +35,4 @@ const GetProductList: React.FC = () => {
   );
 };
 
-export default GetProductList;
+export default UpdateProducts;

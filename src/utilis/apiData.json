@@ -1,0 +1,2288 @@
+{
+  "sections": [
+    {
+      "sectionTitle": "Products",
+      "sectionDescription": "section provides a comprehensive API for managing product-related operations in the KeyCommerce platform. Users can create, retrieve, update, and delete products with secure API key authentication.",
+      "endpoints": [
+        {
+          "title": "Get Products List",
+          "description": "This endpoint allows users to retrieve all available products from the KeyCommerce platform. A valid API key is required for secure access.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/products",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API key"
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK :",
+              "description": "Returns a list of products.",
+              "exampleResponse": {
+                "name": "Product 1",
+                "price": 100,
+                "description": "A sample product",
+                "category": "Electronics",
+                "productImage": "https://image.url",
+                "_id": "123456"
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized:",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "name": "Name of the product.",
+            "price": "Price of the product.",
+            "description": "A short product description.",
+            "category": "Category of the product.",
+            "productImage": "URL for the product image.",
+            "_id": "Unique identifier for the product."
+          },
+          "exampleRequest": {
+            "curl": "curl --location 'https://keycommerce-api.onrender.com/user/products' \\ --header 'x-api-key: Your API Key' \\ --data ''"
+          },
+          "exampleResponse": {
+            "status": "200 OK :",
+            "response": "Request was successful",
+            "body": {
+              "name": "Product 1",
+              "price": 100,
+              "description": "A sample product",
+              "category": "Electronics",
+              "productImage": "https://image.url",
+              "_id": "123456"
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Add Products",
+          "description": "This endpoint allows authorized users to add new products to the KeyCommerce platform. It requires both a valid API key and a bearer token for authentication.",
+          "method": "POST",
+          "url": "https://keycommerce-api.onrender.com/user/products",
+          "apiKeyRequired": true,
+          "requestHeaders": {
+            "x-api-key": "{{apikey}}"
+          },
+          "responses": {
+            "201": {
+              "status": "Created",
+              "description": "Product added successfully."
+            },
+            "401": {
+              "status": "Unauthorized",
+              "description": "Missing or invalid token/API key."
+            },
+            "400": {
+              "status": "Bad Request",
+              "description": "Invalid product data provided."
+            }
+          },
+          "exampleRequest": {
+            "curl": "curl -X POST https://keycommerce-api.onrender.com/user/products -H 'x-api-key: {{apikey}}' -H 'Authorization: Bearer {{token}}' -d '{\"name\": \"Leather Office Chair\", \"description\": \"Ergonomic leather office chair with adjustable height and lumbar support.\", \"price\": 249.99, \"category\": \"Office_Supplies\", \"productImage\": \"https://i.ibb.co/GTPPf5S/Leather-Offic\"}'"
+          },
+          "exampleResponse": {
+            "status": "201 Created",
+            "response": "Product added successfully.",
+            "body": {
+              "name": "Leather Office Chair",
+              "description": "Ergonomic leather office chair with adjustable height and lumbar support.",
+              "price": 249.99,
+              "category": "Office_Supplies",
+              "productImage": "https://i.ibb.co/GTPPf5S/Leather-Offic",
+              "_id": "123456"
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "{{apikey}}",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Update Products",
+          "description": "This endpoint allows authorized users to update the details of an existing product in the KeyCommerce platform. A valid API key is required for authentication.",
+          "method": "PUT",
+          "url": "https://keycommerce-api.onrender.com/user/products/{{product_id}}",
+          "apiKeyRequired": true,
+          "requestHeaders": {
+            "x-api-key": "{{apikey}}"
+          },
+          "responses": {
+            "200": {
+              "status": "OK",
+              "description": "Product updated successfully."
+            },
+            "401": {
+              "status": "Unauthorized",
+              "description": "Missing or invalid token/API key."
+            },
+            "400": {
+              "status": "Bad Request",
+              "description": "Invalid data or product ID."
+            },
+            "404": {
+              "status": "Not Found",
+              "description": "Product not found."
+            }
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g --request PUT 'https://keycommerce-api.onrender.com/user/products/{{product_id}}' \\\n--header 'x-api-key: {{apikey}}' \\\n--data '{\"name\": \"New Branded Leather Office Chair\", \"price\": 249.99, \"description\": \"Ergonomic leather office chair with adjustable height and lumbar support.\", \"category\": \"Office_Supplies\"}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Product updated successfully.",
+            "body": {
+              "message": "Product updated successfully",
+              "product": {
+                "name": "New Branded Leather Office Chair",
+                "price": 249.99,
+                "description": "Ergonomic leather office chair with adjustable height and lumbar support.",
+                "category": "Office_Supplies",
+                "productImage": "https://i.ibb.co/GTPPf5S/Leather-Office-Chair.jpg",
+                "_id": "67789cf1ccd6055f609cf6f2"
+              }
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "{{apikey}}",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Delete Products",
+          "description": "This endpoint allows authorized users to remove a product from the KeyCommerce platform. This action requires a valid API key for authentication.",
+          "method": "DELETE",
+          "url": "https://keycommerce-api.onrender.com/user/products/{{product_id}}",
+          "apiKeyRequired": true,
+          "requestHeaders": {
+            "x-api-key": "{{apikey}}"
+          },
+          "responses": {
+            "200": {
+              "status": "OK",
+              "description": "Product deleted successfully."
+            },
+            "401": {
+              "status": "Unauthorized",
+              "description": "Missing or invalid API key."
+            },
+            "404": {
+              "status": "Not Found",
+              "description": "Product not found or already deleted."
+            }
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g --request DELETE 'https://keycommerce-api.onrender.com/user/products/{{product_id}}' \\\n--header 'x-api-key: {{apikey}}' \\\n--data ''"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Product deleted successfully.",
+            "body": {
+              "message": "Product deleted successfully"
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "{{apikey}}",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Get Single Product",
+          "description": "This endpoint allows users to retrieve the details of a specific product by its unique product ID from the KeyCommerce platform. A valid API key is required to access this endpoint.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/products/{{product_id}}",
+          "apiKeyRequired": true,
+          "requestHeaders": {
+            "x-api-key": "{{apikey}}"
+          },
+          "responses": {
+            "200": {
+              "status": "OK",
+              "description": "Returns the details of the requested product."
+            },
+            "401": {
+              "status": "Unauthorized",
+              "description": "Missing or invalid API key."
+            },
+            "404": {
+              "status": "Not Found",
+              "description": "Product with the provided ID not found."
+            }
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/products/{{product_id}}' \\\n--header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Product details retrieved successfully.",
+            "body": {
+              "name": "Leather Office Chair",
+              "price": 249.99,
+              "description": "Ergonomic leather office chair with adjustable height and lumbar support.",
+              "category": "Office_Supplies",
+              "productImage": "https://i.ibb.co/GTPPf5S/Leather-Office-Chair.jpg",
+              "_id": "6778a258ccd6055f609cf74c"
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "{{apikey}}",
+              "Cache-Control": "no-cache"
+            }
+          }
+        }
+        
+      ]
+    },
+    {
+      "sectionTitle": "Cart",
+      "sectionDescription": "section provides endpoints to manage user carts, including adding items, retrieving cart details, and clearing the cart.",
+      "endpoints": [
+        {
+          "title": "Get Cart Details",
+          "description": "This endpoint allows users to retrieve the details of all products currently in their shopping cart. A valid API key is required to access this endpoint.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/getcart",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API key"
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products currently in the cart.",
+              "exampleResponse": [
+                {
+                  "productId": "67783fcafa41e5a1afdf5e63",
+                  "name": "Backpack",
+                  "price": 59.99,
+                  "description": "Spacious backpack suitable for travel.",
+                  "category": "Accessories",
+                  "productImage": "https://i.ibb.co/dQqjNVm/Backpack.jpg",
+                  "qty": 30,
+                  "totalPrice": 1799.7,
+                  "addedAt": "2025-01-04T04:02:37.199Z",
+                  "_id": "6778b2ddac0d350ac669be9e"
+                }
+              ]
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "productId": "The unique identifier for the product in the cart.",
+            "name": "Name of the product.",
+            "price": "Price of a single unit of the product.",
+            "qty": "Quantity of the product in the cart.",
+            "totalPrice": "Total cost for the product based on quantity.",
+            "addedAt": "Timestamp when the product was added to the cart.",
+            "_id": "Unique identifier for the cart item."
+          },
+          "exampleRequest": {
+            "curl": "curl --location 'https://keycommerce-api.onrender.com/user/getcart' --header 'x-api-key: Your API Key' --data ''"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": [
+              {
+                "productId": "67783fcafa41e5a1afdf5e63",
+                "name": "Backpack",
+                "price": 59.99,
+                "description": "Spacious backpack suitable for travel.",
+                "category": "Accessories",
+                "productImage": "https://i.ibb.co/dQqjNVm/Backpack.jpg",
+                "qty": 30,
+                "totalPrice": 1799.7,
+                "addedAt": "2025-01-04T04:02:37.199Z",
+                "_id": "6778b2ddac0d350ac669be9e"
+              }
+            ],
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Add Item to Cart",
+          "description": "This endpoint allows users to add a product to their shopping cart. If the product already exists, its quantity is updated instead of adding a duplicate entry.",
+          "method": "POST",
+          "url": "https://keycommerce-api.onrender.com/user/addcart",
+          "apiKeyRequired": true,
+          "borderColor": "border-green-500",
+          "requestHeaders": {
+            "x-api-key": "Your API key"
+          },
+          "requestBody": {
+            "product_id": "67783fcafa41e5a1afdf5e51",
+            "quantity": 2
+          },
+          "responses": {
+            "201": {
+              "status": "201 Created",
+              "description": "Product added to cart successfully.",
+              "exampleResponse": {
+                "message": "Product quantity updated in cart",
+                "cart": {
+                  "productId": "67783fcafa41e5a1afdf5e63",
+                  "name": "Backpack",
+                  "price": 59.99,
+                  "description": "Spacious backpack suitable for travel.",
+                  "category": "Accessories",
+                  "productImage": "https://i.ibb.co/dQqjNVm/Backpack.jpg",
+                  "qty": 30,
+                  "totalPrice": 1799.7,
+                  "addedAt": "2025-01-04T04:02:37.199Z",
+                  "_id": "6778b2ddac0d350ac669be9e"
+                }
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            },
+            "400": {
+              "status": "400 Bad Request",
+              "description": "Invalid or missing product data."
+            }
+          },
+          "exampleRequest": {
+            "curl": "curl --location 'https://keycommerce-api.onrender.com/user/addcart' --header 'x-api-key: Your API Key' --data '{ \"product_id\": \"67783fcafa41e5a1afdf5e51\", \"quantity\": 2 }'"
+          },
+          "exampleResponse": {
+            "status": "201 Created",
+            "response": "Product added to cart successfully",
+            "body": {
+              "message": "Product quantity updated in cart",
+              "cart": {
+                "productId": "67783fcafa41e5a1afdf5e63",
+                "name": "Backpack",
+                "price": 59.99,
+                "description": "Spacious backpack suitable for travel.",
+                "category": "Accessories",
+                "productImage": "https://i.ibb.co/dQqjNVm/Backpack.jpg",
+                "qty": 30,
+                "totalPrice": 1799.7,
+                "addedAt": "2025-01-04T04:02:37.199Z",
+                "_id": "6778b2ddac0d350ac669be9e"
+              }
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "{{apikey}}",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Delete Item from Cart",
+          "description": "This endpoint allows users to remove a specific product from their shopping cart by providing the cart item ID.",
+          "method": "DELETE",
+          "url": "https://keycommerce-api.onrender.com/user/deletecart/{{cart_id}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-red-500",
+          "requestHeaders": {
+            "x-api-key": "Your API key"
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Product removed from cart successfully.",
+              "exampleResponse": {
+                "message": "Cart item deleted successfully",
+                "cart": [
+                  {
+                    "productId": "67783fcafa41e5a1afdf5e51",
+                    "name": "Wireless Mouse",
+                    "price": 25.99,
+                    "description": "A high-quality wireless mouse with ergonomic design.",
+                    "category": "Electronics",
+                    "productImage": "https://i.ibb.co/3MJRw5d/wireless-mouse.jpg",
+                    "qty": 30,
+                    "totalPrice": 779.7,
+                    "addedAt": "2025-01-04T04:37:25.527Z",
+                    "_id": "6778bb0584553656a51b42d0"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            },
+            "404": {
+              "status": "404 Not Found",
+              "description": "Product not found in cart."
+            }
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g --request DELETE 'https://keycommerce-api.onrender.com/user/deletecart/{{cart_id}}' --header 'x-api-key: Your API Key' --data ''"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Product removed from cart successfully",
+            "body": {
+              "message": "Cart item deleted successfully",
+              "cart": [
+                {
+                  "productId": "67783fcafa41e5a1afdf5e51",
+                  "name": "Wireless Mouse",
+                  "price": 25.99,
+                  "description": "A high-quality wireless mouse with ergonomic design.",
+                  "category": "Electronics",
+                  "productImage": "https://i.ibb.co/3MJRw5d/wireless-mouse.jpg",
+                  "qty": 30,
+                  "totalPrice": 779.7,
+                  "addedAt": "2025-01-04T04:37:25.527Z",
+                  "_id": "6778bb0584553656a51b42d0"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "{{apikey}}",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Empty Cart",
+          "description": "This endpoint allows users to empty all items from their shopping cart. A valid API key is required.",
+          "method": "DELETE",
+          "url": "https://keycommerce-api.onrender.com/user/emptycart",
+          "apiKeyRequired": true,
+          "borderColor": "border-yellow-500",
+          "requestHeaders": {
+            "x-api-key": "Your API key"
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "All items removed from the cart successfully.",
+              "exampleResponse": {
+                "message": "All items deleted from cart",
+                "cart": []
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "exampleRequest": {
+            "curl": "curl --location 'https://keycommerce-api.onrender.com/user/emptycart' --header 'x-api-key: Your API Key' --data ''"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "All items removed from cart",
+            "body": {
+              "message": "All items deleted from cart",
+              "cart": []
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "{{apikey}}",
+              "Cache-Control": "no-cache"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sectionTitle": "User",
+      "sectionDescription": "section provides endpoints for managing user accounts, including login, registration, and profile updates.",
+      "endpoints": [
+        {
+          "title": "Register User",
+          "description": "This endpoint allows new users to create an account on the KeyCommerce platform by providing their name, username, email, and password.",
+          "method": "POST",
+          "url": "https://keycommerce-api.onrender.com/register",
+          "apiKeyRequired": false,
+          "borderColor": "border-green-500",
+          "requestHeaders": {},
+          "requestBody": {
+            "name": "test01@gmail.com",
+            "username": "test01",
+            "email": "test01@gmail.com",
+            "password": "test01@gmail.com"
+          },
+          "responses": {
+            "201": {
+              "status": "201 Created",
+              "description": "User created successfully.",
+              "exampleResponse": {
+                "message": "User created successfully",
+                "user": {
+                  "name": "test01@gmail.com",
+                  "username": "test01",
+                  "email": "test01@gmail.com",
+                  "password": "$2a$10$ch.Eof6V/i8DY95ONbDtrO2G74xQPiEtWEZ3AIACji8YCJMASYlIO",
+                  "_id": "67783eb3fa41e5a1afdf5e4c",
+                  "products": [],
+                  "cart": [],
+                  "__v": 0
+                }
+              }
+            },
+            "400": {
+              "status": "400 Bad Request",
+              "description": "Invalid or missing user data."
+            }
+          },
+          "exampleRequest": {
+            "curl": "curl --location 'https://keycommerce-api.onrender.com/register' --data-raw '{\"name\":\"test01@gmail.com\", \"username\":\"test01\", \"email\":\"test01@gmail.com\", \"password\":\"test01@gmail.com\"}'"
+          },
+          "exampleResponse": {
+            "status": "201 Created",
+            "response": "User created successfully",
+            "body": {
+              "message": "User created successfully",
+              "user": {
+                "name": "test01@gmail.com",
+                "username": "test01",
+                "email": "test01@gmail.com",
+                "password": "$2a$10$ch.Eof6V/i8DY95ONbDtrO2G74xQPiEtWEZ3AIACji8YCJMASYlIO",
+                "_id": "67783eb3fa41e5a1afdf5e4c",
+                "products": [],
+                "cart": [],
+                "__v": 0
+              }
+            },
+            "headers": {
+              "Content-Type": "application/json"
+            }
+          }
+        },
+        {
+          "title": "Login User",
+          "description": "This endpoint allows registered users to authenticate by providing their email and password. Upon successful authentication, a token will be returned for secure access to protected resources.",
+          "method": "POST",
+          "url": "https://keycommerce-api.onrender.com/login",
+          "apiKeyRequired": false,
+          "borderColor": "border-green-500",
+          "requestHeaders": {},
+          "requestBody": {
+            "email": "test01@gmail.com",
+            "password": "test01@gmail.com"
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "User logged in successfully.",
+              "exampleResponse": {
+                "token": "your_token_here",
+                "user": {
+                  "name": "test01@gmail.com",
+                  "username": "test01",
+                  "email": "test01@gmail.com",
+                  "_id": "67783eb3fa41e5a1afdf5e4c",
+                  "products": [],
+                  "cart": [],
+                  "__v": 0
+                },
+                "message": "User logged in successfully"
+              }
+            },
+            "400": {
+              "status": "400 Bad Request",
+              "description": "Missing or invalid credentials."
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Invalid email or password."
+            }
+          },
+          "exampleRequest": {
+            "curl": "curl --location 'https://keycommerce-api.onrender.com/login' --data-raw '{\"email\": \"test01@gmail.com\", \"password\": \"test01@gmail.com\"}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "User logged in successfully",
+            "body": {
+              "token": "your_token_here",
+              "user": {
+                "name": "test01@gmail.com",
+                "username": "test01",
+                "email": "test01@gmail.com",
+                "_id": "67783eb3fa41e5a1afdf5e4c",
+                "products": [],
+                "cart": [],
+                "__v": 0
+              },
+              "message": "User logged in successfully"
+            },
+            "headers": {
+              "Content-Type": "application/json"
+            }
+          }
+        }        
+      ]
+    },
+    {
+      "sectionTitle": "Paginate",
+      "sectionDescription": "section provides endpoints to handle pagination of product listings, ensuring smooth navigation through large datasets.",
+      "endpoints": [
+        {
+          "title": "Filter Products by Category",
+          "description": "This endpoint allows users to retrieve products filtered by a specific category. The category filter enables users to view only the products that belong to the selected category, making it easier to manage and browse the products based on their types. A valid API key must be included in the request headers for authorization.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API key"
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by the specified category.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "67783fcafa41e5a1afdf5e55",
+                    "name": "Desk Organizer",
+                    "price": 19.99,
+                    "description": "A wooden desk organizer with multiple compartments for stationery.",
+                    "category": "Office_Supplies",
+                    "productImage": "https://i.ibb.co/gPFpmpS/Desk-Organizer-Office-Supplies.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e55"
+                  },
+                  {
+                    "productId": "67783fcafa41e5a1afdf5e56",
+                    "name": "Pen Set",
+                    "price": 12.99,
+                    "description": "A set of pencils, pens, and markers for writing and drawing.",
+                    "category": "Office_Supplies",
+                    "productImage": "https://i.ibb.co/BNH7zxj/Pen-Set.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e56"
+                  },
+                  {
+                    "productId": "67783fcafa41e5a1afdf5e57",
+                    "name": "Printer",
+                    "price": 79.99,
+                    "description": "A high-quality printer for printing documents and photos.",
+                    "category": "Office_Supplies",
+                    "productImage": "https://i.ibb.co/QKJgRDr/Printer.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e57"
+                  },
+                  {
+                    "productId": "67783fcafa41e5a1afdf5e58",
+                    "name": "Calculator",
+                    "price": 9.99,
+                    "description": "A portable calculator for quick calculations.",
+                    "category": "Office_Supplies",
+                    "productImage": "https://i.ibb.co/6yLsfSj/Calculator.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e58"
+                  },
+                  {
+                    "productId": "6778a258ccd6055f609cf74c",
+                    "name": "Leather Office Chair",
+                    "price": 249.99,
+                    "description": "Ergonomic leather office chair with adjustable height and lumbar support.",
+                    "category": "Office_Supplies",
+                    "productImage": "https://i.ibb.co/GTPPf5S/Leather-Office-Chair.jpg",
+                    "_id": "6778a258ccd6055f609cf74c"
+                  }
+                ],
+                "total": 5,
+                "page": 1,
+                "limit": 10
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A message confirming that products have been fetched successfully.",
+            "products": "A list of products filtered by the category. Each product contains details such as name, price, description, category, and productImage.",
+            "_id": "Unique identifier for the product."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "productId": "67783fcafa41e5a1afdf5e55",
+                  "name": "Desk Organizer",
+                  "price": 19.99,
+                  "description": "A wooden desk organizer with multiple compartments for stationery.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/gPFpmpS/Desk-Organizer-Office-Supplies.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e55"
+                }
+              ],
+              "total": 5,
+              "page": 1,
+              "limit": 10
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Get Limited Products Results",
+          "description": "This endpoint allows users to retrieve a limited number of products per page by specifying the limit query parameter. This is useful for paginating product listings, especially when dealing with a large number of products.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?limit={{limit_number}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products based on the specified limit.",
+              "exampleResponse": {
+                "products": [
+                  {
+                    "name": "Wireless Mouse",
+                    "price": 25.99,
+                    "description": "A high-quality wireless mouse with ergonomic design.",
+                    "category": "Electronics",
+                    "productImage": "https://i.ibb.co/3MJRw5d/wireless-mouse.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e51"
+                  },
+                  {
+                    "name": "Bluetooth Headphones",
+                    "price": 89.99,
+                    "description": "Noise-cancelling Bluetooth headphones with long battery life.",
+                    "category": "Electronics",
+                    "productImage": "https://i.ibb.co/FnyS12x/Bluetooth-Headphones.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e52"
+                  },
+                  {
+                    "name": "Laptop Stand",
+                    "price": 35.5,
+                    "description": "A sleek and adjustable laptop stand for ergonomic working.",
+                    "category": "Electronics",
+                    "productImage": "https://i.ibb.co/y83xfbc/Laptop-Stand.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e53"
+                  },
+                  {
+                    "name": "Smartwatch",
+                    "price": 129.99,
+                    "description": "A smartwatch with fitness tracking and heart rate monitoring.",
+                    "category": "Electronics",
+                    "productImage": "https://i.ibb.co/M5mKWSx/Smartwatch.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e54"
+                  },
+                  {
+                    "name": "Desk Organizer",
+                    "price": 19.99,
+                    "description": "A wooden desk organizer with multiple compartments for stationery.",
+                    "category": "Office_Supplies",
+                    "productImage": "https://i.ibb.co/gPFpmpS/Desk-Organizer-Office-Supplies.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e55"
+                  }
+                ],
+                "total": 21,
+                "page": 1,
+                "limit": 5
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "productId": "The unique identifier for the product.",
+            "name": "The name of the product.",
+            "price": "The price of the product.",
+            "description": "A description of the product.",
+            "category": "The category the product belongs to.",
+            "productImage": "The URL of the product image.",
+            "_id": "The unique identifier for the product in the database."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?limit={{limit_number}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "products": [
+                {
+                  "name": "Wireless Mouse",
+                  "price": 25.99,
+                  "description": "A high-quality wireless mouse with ergonomic design.",
+                  "category": "Electronics",
+                  "productImage": "https://i.ibb.co/3MJRw5d/wireless-mouse.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e51"
+                },
+                {
+                  "name": "Bluetooth Headphones",
+                  "price": 89.99,
+                  "description": "Noise-cancelling Bluetooth headphones with long battery life.",
+                  "category": "Electronics",
+                  "productImage": "https://i.ibb.co/FnyS12x/Bluetooth-Headphones.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e52"
+                },
+                {
+                  "name": "Laptop Stand",
+                  "price": 35.5,
+                  "description": "A sleek and adjustable laptop stand for ergonomic working.",
+                  "category": "Electronics",
+                  "productImage": "https://i.ibb.co/y83xfbc/Laptop-Stand.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e53"
+                },
+                {
+                  "name": "Smartwatch",
+                  "price": 129.99,
+                  "description": "A smartwatch with fitness tracking and heart rate monitoring.",
+                  "category": "Electronics",
+                  "productImage": "https://i.ibb.co/M5mKWSx/Smartwatch.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e54"
+                },
+                {
+                  "name": "Desk Organizer",
+                  "price": 19.99,
+                  "description": "A wooden desk organizer with multiple compartments for stationery.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/gPFpmpS/Desk-Organizer-Office-Supplies.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e55"
+                }
+              ],
+              "total": 21,
+              "page": 1,
+              "limit": 5
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Skip Products Results",
+          "description": "This endpoint allows users to skip a specific number of products from the beginning of the result set, which is useful for pagination. By setting the skip query parameter, users can specify how many products to skip, allowing them to retrieve the next set of products for the next page in the pagination flow.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?skip={{skip_number}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-green-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "skip": "The number of products to skip from the beginning of the result set."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products after skipping the specified number of products.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 19.99,
+                    "description": "Product description here.",
+                    "category": "category_name",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A message confirming that products have been fetched successfully.",
+            "products": "A list of products returned by the query, each product containing details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?skip={{skip_number}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "productId": "product_id",
+                  "name": "Product Name",
+                  "price": 19.99,
+                  "description": "Product description here.",
+                  "category": "category_name",
+                  "productImage": "image_url",
+                  "_id": "product_id"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Sort Products by Price Descending",
+          "description": "This endpoint allows users to retrieve products sorted by price in descending order. The sortBy query parameter allows users to specify how the results should be sorted. In this case, products will be returned with the highest price first and the lowest price last, helping users view products in order of their price range.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?sortBy={{price:desc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "sortBy": "Specifies how the results should be sorted. The format is field:direction (e.g., price:desc)."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products sorted by price in descending order.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 99.99,
+                    "description": "Product description here.",
+                    "category": "category_name",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A message confirming that products have been fetched successfully.",
+            "products": "A list of products returned by the query, each product containing details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?sortBy={{price%3Adesc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Leather Office Chair",
+                  "price": 249.99,
+                  "description": "Ergonomic leather office chair with adjustable height and lumbar support.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/GTPPf5S/Leather-Office-Chair.jpg",
+                  "_id": "6778a258ccd6055f609cf74c"
+                },
+                {
+                  "name": "Smartwatch",
+                  "price": 129.99,
+                  "description": "A smartwatch with fitness tracking and heart rate monitoring.",
+                  "category": "Electronics",
+                  "productImage": "https://i.ibb.co/M5mKWSx/Smartwatch.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e54"
+                },
+                {
+                  "name": "Wristwatch",
+                  "price": 120,
+                  "description": "Stylish wristwatch with a leather strap.",
+                  "category": "Accessories",
+                  "productImage": "https://i.ibb.co/ZXy8DX7/Wristwatch.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e61"
+                },
+                {
+                  "name": "Bluetooth Headphones",
+                  "price": 89.99,
+                  "description": "Noise-cancelling Bluetooth headphones with long battery life.",
+                  "category": "Electronics",
+                  "productImage": "https://i.ibb.co/FnyS12x/Bluetooth-Headphones.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e52"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Sort Products by Price Ascending",
+          "description": "This endpoint allows users to retrieve products sorted by price in ascending order. The sortBy query parameter allows users to specify how the results should be sorted. In this case, products will be returned with the lowest price first and the highest price last, making it easier for users to view products within a specific price range.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?sortBy={{price:asc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-green-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "sortBy": "Specifies how the results should be sorted. The format is field:direction (e.g., price:asc)."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products sorted by price in ascending order.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 9.99,
+                    "description": "Product description here.",
+                    "category": "category_name",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A message confirming that products have been fetched successfully.",
+            "products": "A list of products returned by the query, each product containing details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?sortBy={{price%3Aasc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Basic T-shirt",
+                  "price": 9.99,
+                  "description": "Comfortable cotton t-shirt in various sizes.",
+                  "category": "Clothing",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Tshirt.jpg",
+                  "_id": "12345678abcdefg"
+                },
+                {
+                  "name": "Water Bottle",
+                  "price": 12.99,
+                  "description": "Durable and eco-friendly water bottle.",
+                  "category": "Accessories",
+                  "productImage": "https://i.ibb.co/XXXXXXX/WaterBottle.jpg",
+                  "_id": "12345678hijklmn"
+                },
+                {
+                  "name": "USB Cable",
+                  "price": 5.99,
+                  "description": "High-speed USB cable for charging and data transfer.",
+                  "category": "Electronics",
+                  "productImage": "https://i.ibb.co/XXXXXXX/USBCable.jpg",
+                  "_id": "12345678opqrst"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category and Limit Results",
+          "description": "This endpoint allows users to retrieve products filtered by a specific category and limits the number of results. By providing a category query parameter, users can filter the products to only those that belong to the selected category. Additionally, the limit query parameter specifies how many products to return, enabling pagination and better performance when retrieving large sets of data.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Specifies the category of products to filter by. It is a required parameter.",
+            "limit": "Specifies the number of products to return. Limits the number of results for better performance."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by the specified category and limited to the specified number of results.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 19.99,
+                    "description": "Product description here.",
+                    "category": "Office_Supplies",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A message confirming that products have been fetched successfully.",
+            "products": "A list of products returned by the query, filtered by category and limited by the limit parameter. Each product contains details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Office Chair",
+                  "price": 149.99,
+                  "description": "Ergonomic office chair for long hours of work.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Chair.jpg",
+                  "_id": "product_id_12345"
+                },
+                {
+                  "name": "Desk Organizer",
+                  "price": 19.99,
+                  "description": "Keep your desk tidy and organized.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Organizer.jpg",
+                  "_id": "product_id_12346"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category and Skip Results",
+          "description": "This endpoint allows users to retrieve products filtered by a specific category and skips a set number of results. The category query parameter filters products by the selected category, and the skip parameter allows users to skip a certain number of products, enabling better navigation through large datasets.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&skip={{skip_number}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Specifies the category of products to filter by. It is a required parameter.",
+            "skip": "Specifies the number of products to skip in the results. Useful for pagination when navigating through large datasets."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by the specified category, skipping the first set of results.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 19.99,
+                    "description": "Product description here.",
+                    "category": "Office_Supplies",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A message confirming that products have been fetched successfully.",
+            "products": "A list of products returned by the query, filtered by category and skipping the specified number of results. Each product contains details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&skip={{skip_number}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Office Chair",
+                  "price": 149.99,
+                  "description": "Ergonomic office chair for long hours of work.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Chair.jpg",
+                  "_id": "product_id_12345"
+                },
+                {
+                  "name": "Desk Organizer",
+                  "price": 19.99,
+                  "description": "Keep your desk tidy and organized.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Organizer.jpg",
+                  "_id": "product_id_12346"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category and Sort by Price Descending",
+          "description": "This endpoint allows users to retrieve products filtered by a specific category (e.g., 'Office_Supplies') and sorted by price in descending order. The 'category' query parameter filters products by the selected category, and the 'sortBy' query parameter sorts the results based on the product price, with the most expensive products appearing first.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&sortBy={{price:desc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-green-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Specifies the category of products to filter by. It is a required parameter. For example, 'Office_Supplies'.",
+            "sortBy": "Sorts the products by a specific field. In this case, the products will be sorted by 'price' in descending order (e.g., 'price:desc'), meaning the highest-priced products will appear first."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by the specified category and sorted by price in descending order.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 19.99,
+                    "description": "Product description here.",
+                    "category": "Office_Supplies",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A message confirming that products have been fetched successfully.",
+            "products": "A list of products returned by the query, filtered by category and sorted by price in descending order. Each product contains details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&sortBy={{price:desc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Premium Office Chair",
+                  "price": 299.99,
+                  "description": "Ergonomic office chair designed for comfort during long hours of work.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Chair.jpg",
+                  "_id": "product_id_12345"
+                },
+                {
+                  "name": "Executive Desk",
+                  "price": 199.99,
+                  "description": "Stylish and functional desk perfect for modern office setups.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Desk.jpg",
+                  "_id": "product_id_12346"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category, Limit, and Skip",
+          "description": "This endpoint allows users to retrieve products filtered by a specific category (e.g., 'Office_Supplies'), limit the number of results to a specified number (e.g., 5 products per page), and skip the first set of results (e.g., skip the first 5 products). This combination of parameters helps users paginate through the products in a specific category, making browsing easier for large datasets.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&skip={{skip_number}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Specifies the category of products to filter by. For example, 'Office_Supplies'.",
+            "limit": "Specifies the number of products to return per page (e.g., 5).",
+            "skip": "Specifies the number of products to skip from the beginning of the result set (e.g., skip the first 5 products)."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by category, limited to the specified number of results per page, and skipping the specified number of products.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 19.99,
+                    "description": "Product description here.",
+                    "category": "Office_Supplies",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A message confirming that products have been fetched successfully.",
+            "products": "A list of products returned by the query, filtered by category, with the specified limit and skip. Each product contains details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&skip={{skip_number}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Office Chair",
+                  "price": 49.99,
+                  "description": "Comfortable and ergonomic chair perfect for office use.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Chair.jpg",
+                  "_id": "product_id_12345"
+                },
+                {
+                  "name": "Desk Lamp",
+                  "price": 25.99,
+                  "description": "Adjustable desk lamp with a modern design.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Lamp.jpg",
+                  "_id": "product_id_12346"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category, Limit, and Sort by Price Descending",
+          "description": "This endpoint allows users to retrieve products filtered by a specific category (e.g., 'Office_Supplies'), limit the number of results to a specified number (e.g., 5 products per page), and sort the products by their price in descending order. This combination of parameters helps users view the most expensive products in a given category with controlled pagination.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&sortBy={{price:desc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Specifies the category of products to filter by. For example, 'Office_Supplies'.",
+            "limit": "Specifies the number of products to return per page (e.g., 5).",
+            "sortBy": "Specifies how to sort the products. In this case, 'price:desc' sorts the products by price in descending order."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by category, limited to the specified number of results per page, and sorted by price in descending order.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 199.99,
+                    "description": "Product description here.",
+                    "category": "Office_Supplies",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A message confirming that products have been fetched successfully.",
+            "products": "A list of products returned by the query, filtered by category, limited to the specified number of results per page, and sorted by price in descending order. Each product contains details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&sortBy={{price:desc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Executive Desk",
+                  "price": 299.99,
+                  "description": "Luxury executive desk with modern design and large workspace.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Executive-Desk.jpg",
+                  "_id": "product_id_12345"
+                },
+                {
+                  "name": "Office Chair",
+                  "price": 199.99,
+                  "description": "Comfortable and ergonomic office chair with adjustable features.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Office-Chair.jpg",
+                  "_id": "product_id_12346"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category, Limit, and Sort by Price Ascending",
+          "description": "This endpoint allows users to filter products by a specified category (e.g., 'Office_Supplies'), limit the number of results to a specified number (e.g., 5 products per page), and sort the products by price in ascending order. This provides a refined way to browse products with better control over the displayed data, showcasing the least expensive items first.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&sortBy={{price:asc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-green-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Specifies the category of products to filter by. For example, 'Office_Supplies'.",
+            "limit": "Specifies the number of products to return per page (e.g., 5).",
+            "sortBy": "Specifies how to sort the products. In this case, 'price:asc' sorts the products by price in ascending order."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by category, limited to the specified number of results per page, and sorted by price in ascending order.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 99.99,
+                    "description": "Product description here.",
+                    "category": "Office_Supplies",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A confirmation message that products have been successfully fetched.",
+            "products": "A list of products returned by the query, filtered by category, limited to the specified number of results per page, and sorted by price in ascending order. Each product contains details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&sortBy={{price:asc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Basic Desk Organizer",
+                  "price": 19.99,
+                  "description": "A simple and affordable desk organizer for office supplies.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Desk-Organizer.jpg",
+                  "_id": "product_id_12345"
+                },
+                {
+                  "name": "Compact Printer",
+                  "price": 49.99,
+                  "description": "Affordable and space-saving printer for home offices.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/XXXXXXX/Compact-Printer.jpg",
+                  "_id": "product_id_12346"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category, Skip, and Sort by Price Descending",
+          "description": "This endpoint allows users to filter products by a specified category (e.g., 'Office_Supplies'), skip a certain number of products (e.g., skip the first 5 products), and sort the results by price in descending order. This helps users view the next set of products in the category, ordered from the most expensive to the least expensive, excluding the initial results.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&skip={{skip_number}}&sortBy={{price:desc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Specifies the category of products to filter by. For example, 'Office_Supplies'.",
+            "skip": "Specifies the number of products to skip. For example, 5 means the first 5 products will be excluded from the results.",
+            "sortBy": "Specifies how to sort the products. In this case, 'price:desc' sorts the products by price in descending order."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by category, skipping the specified number of products, and sorted by price in descending order.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 199.99,
+                    "description": "Product description here.",
+                    "category": "Office_Supplies",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ],
+                "total": 5,
+                "page": 1,
+                "limit": 10
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A confirmation message that products have been successfully fetched.",
+            "products": "A list of products matching the filters, excluding the specified number of products, and sorted by price in descending order. Each product includes details such as productId, name, price, description, category, productImage, and _id.",
+            "total": "Total number of products matching the query.",
+            "page": "The current page number of the results.",
+            "limit": "The number of products per page."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&skip={{skip_number}}&sortBy={{price%3Adesc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Desk Organizer",
+                  "price": 19.99,
+                  "description": "A wooden desk organizer with multiple compartments for stationery.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/gPFpmpS/Desk-Organizer-Office-Supplies.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e55"
+                },
+                {
+                  "name": "Pen Set",
+                  "price": 12.99,
+                  "description": "A set of pencils, pens, and markers for writing and drawing.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/BNH7zxj/Pen-Set.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e56"
+                },
+                {
+                  "name": "Calculator",
+                  "price": 9.99,
+                  "description": "A portable calculator for quick calculations.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/6yLsfSj/Calculator.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e58"
+                }
+              ],
+              "total": 5,
+              "page": 1,
+              "limit": 10
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category, Skip, and Sort by Price Ascending",
+          "description": "This endpoint allows users to filter products by a specified category (e.g., 'Office_Supplies'), skip a certain number of products (e.g., skip the first 5 products), and sort the results by price in ascending order. This helps users view the next set of products in the category, ordered from the least expensive to the most expensive, excluding the initial results.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&skip={{skip_number}}&sortBy={{price:asc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-green-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Specifies the category of products to filter by. For example, 'Office_Supplies'.",
+            "skip": "Specifies the number of products to skip. For example, 5 means the first 5 products will be excluded from the results.",
+            "sortBy": "Specifies how to sort the products. In this case, 'price:asc' sorts the products by price in ascending order."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by category, skipping the specified number of products, and sorted by price in ascending order.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 49.99,
+                    "description": "Product description here.",
+                    "category": "Office_Supplies",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A confirmation message that products have been successfully fetched.",
+            "products": "A list of products matching the filters, excluding the specified number of products, and sorted by price in ascending order. Each product includes details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&skip={{skip_number}}&sortBy={{price%3Aasc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Desk Organizer",
+                  "price": 19.99,
+                  "description": "A wooden desk organizer with multiple compartments for stationery.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/gPFpmpS/Desk-Organizer-Office-Supplies.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e55"
+                },
+                {
+                  "name": "Pen Set",
+                  "price": 12.99,
+                  "description": "A set of pencils, pens, and markers for writing and drawing.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/BNH7zxj/Pen-Set.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e56"
+                },
+                {
+                  "name": "Calculator",
+                  "price": 9.99,
+                  "description": "A portable calculator for quick calculations.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/6yLsfSj/Calculator.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e58"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Limit, Skip, and Sort by Price Descending",
+          "description": "This endpoint allows users to limit the number of products returned (e.g., 5 products per page), skip a specified number of products (e.g., skip the first 5 products), and sort the products by price in descending order. This combination of parameters is useful for paginating and viewing a specific set of sorted products.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?limit={{limit_number}}&skip={{skip_number}}&sortBy={{price:desc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-blue-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "limit": "Limits the number of products returned. Example: 5.",
+            "skip": "Specifies the number of products to skip. Example: 5 skips the first 5 products.",
+            "sortBy": "Specifies how to sort the products. In this case, 'price:desc' sorts the products by price in descending order."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products based on the applied filters (limit, skip, and sort).",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "name": "Wristwatch",
+                    "price": 120,
+                    "description": "Stylish wristwatch with a leather strap.",
+                    "category": "Accessories",
+                    "productImage": "https://i.ibb.co/ZXy8DX7/Wristwatch.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e61"
+                  },
+                  {
+                    "name": "Bluetooth Headphones",
+                    "price": 89.99,
+                    "description": "Noise-cancelling Bluetooth headphones with long battery life.",
+                    "category": "Electronics",
+                    "productImage": "https://i.ibb.co/FnyS12x/Bluetooth-Headphones.jpg",
+                    "_id": "67783fcafa41e5a1afdf5e52"
+                  }
+                ],
+                "total": 21,
+                "page": 1,
+                "limit": 5
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A confirmation message indicating that the products have been successfully fetched.",
+            "products": "A list of products that match the applied filters. The list includes name, price, description, category, productImage, and _id for each product.",
+            "total": "The total number of products available.",
+            "page": "The current page number of the results.",
+            "limit": "The limit applied to the number of products per page."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?limit={{limit_number}}&skip={{skip_number}}&sortBy={{price%3Adesc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Wristwatch",
+                  "price": 120,
+                  "description": "Stylish wristwatch with a leather strap.",
+                  "category": "Accessories",
+                  "productImage": "https://i.ibb.co/ZXy8DX7/Wristwatch.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e61"
+                },
+                {
+                  "name": "Bluetooth Headphones",
+                  "price": 89.99,
+                  "description": "Noise-cancelling Bluetooth headphones with long battery life.",
+                  "category": "Electronics",
+                  "productImage": "https://i.ibb.co/FnyS12x/Bluetooth-Headphones.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e52"
+                }
+              ],
+              "total": 21,
+              "page": 1,
+              "limit": 5
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Limit, Skip, and Sort by Price Ascending",
+          "description": "This endpoint allows users to limit the number of products returned (e.g., 5 products per page), skip a specified number of products (e.g., skip the first 5 products), and sort the products by price in ascending order. This combination of parameters is useful for paginating and viewing a specific set of sorted products with the lowest prices first.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?limit={{limit_number}}&skip={{skip_number}}&sortBy={{price:asc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-green-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "limit": "Limits the number of products returned. Example: 5.",
+            "skip": "Specifies the number of products to skip. Example: 5 skips the first 5 products.",
+            "sortBy": "Specifies how to sort the products. In this case, 'price:asc' sorts the products by price in ascending order."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products based on the applied filters (limit, skip, and sort).",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 49.99,
+                    "description": "Product description here.",
+                    "category": "Electronics",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A confirmation message indicating that the products have been successfully fetched.",
+            "products": "A list of products that match the applied filters. The list includes name, price, description, category, productImage, and _id for each product.",
+            "_id": "The unique identifier for the product in the database."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?limit={{limit_number}}&skip={{skip_number}}&sortBy={{price%3Aasc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "productId": "product_id",
+                  "name": "Product Name",
+                  "price": 49.99,
+                  "description": "Product description here.",
+                  "category": "Electronics",
+                  "productImage": "image_url",
+                  "_id": "product_id"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category, Limit, Skip, and Sort by Price Descending",
+          "description": "This endpoint allows users to filter products by a specified category (e.g., 'Office_Supplies'), limit the results to a specified number of products (e.g., 5 products), skip a certain number of products (e.g., skip the first 5 products), and sort the results by price in descending order. This provides refined control over product listings, pagination, and sorting by price from high to low.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&skip={{skip_number}}&sortBy={{price:desc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-red-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Specifies the category of products to filter by. For example, 'Office_Supplies'.",
+            "limit": "Limits the number of products returned. For example, 5.",
+            "skip": "Specifies the number of products to skip. For example, 5 means the first 5 products will be excluded from the results.",
+            "sortBy": "Specifies how to sort the products. In this case, 'price:desc' sorts the products by price in descending order."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by category, limited by the specified number, skipping the specified number, and sorted by price in descending order.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 199.99,
+                    "description": "Product description here.",
+                    "category": "category_name",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A confirmation message that products have been successfully fetched.",
+            "products": "A list of products matching the filters, excluding the specified number of products, and sorted by price in descending order. Each product includes details such as productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&skip={{skip_number}}&sortBy={{price%3Adesc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Desk Organizer",
+                  "price": 49.99,
+                  "description": "A wooden desk organizer with multiple compartments for stationery.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/gPFpmpS/Desk-Organizer-Office-Supplies.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e55"
+                },
+                {
+                  "name": "Pen Set",
+                  "price": 12.99,
+                  "description": "A set of pencils, pens, and markers for writing and drawing.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/BNH7zxj/Pen-Set.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e56"
+                },
+                {
+                  "name": "Calculator",
+                  "price": 9.99,
+                  "description": "A portable calculator for quick calculations.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/6yLsfSj/Calculator.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e58"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Filter Products by Category, Limit, Skip, and Sort by Price Ascending",
+          "description": "This endpoint allows users to filter products by a specified category (e.g., 'Office_Supplies'), limit the number of products returned (e.g., 5 products per page), skip a specified number of products (e.g., skip the first 5), and sort the results by price in ascending order. This provides a refined control over product listings, pagination, and sorting by price from low to high.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&skip={{skip_number}}&sortBy={{price:asc}}",
+          "apiKeyRequired": true,
+          "borderColor": "border-green-500",
+          "requestHeaders": {
+            "x-api-key": "Your API Key"
+          },
+          "queryParams": {
+            "category": "Filters the products by the specified category. Example: 'Office_Supplies'.",
+            "limit": "Limits the number of products returned. Example: 5.",
+            "skip": "Skips the first specified number of products. Example: 5 skips the first 5 products.",
+            "sortBy": "Specifies how to sort the products. In this case, 'price:asc' sorts the products by price in ascending order."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Returns a list of products filtered by category, limited to the specified number, skipping the specified number, and sorted by price in ascending order.",
+              "exampleResponse": {
+                "message": "Products fetched successfully.",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 49.99,
+                    "description": "Product description here.",
+                    "category": "Office_Supplies",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A confirmation message indicating that the products have been successfully fetched.",
+            "products": "A list of products that match the applied filters. The list includes productId, name, price, description, category, productImage, and _id for each product."
+          },
+          "exampleRequest": {
+            "curl": "curl --location -g 'https://keycommerce-api.onrender.com/user/paginate_products?category={{category_name}}&limit={{limit_number}}&skip={{skip_number}}&sortBy={{price%3Aasc}}' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Products fetched successfully.",
+              "products": [
+                {
+                  "name": "Desk Organizer",
+                  "price": 19.99,
+                  "description": "A wooden desk organizer with multiple compartments for stationery.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/gPFpmpS/Desk-Organizer-Office-Supplies.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e55"
+                },
+                {
+                  "name": "Pen Set",
+                  "price": 7.99,
+                  "description": "A set of pencils, pens, and markers for writing and drawing.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/BNH7zxj/Pen-Set.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e56"
+                },
+                {
+                  "name": "Calculator",
+                  "price": 4.99,
+                  "description": "A portable calculator for quick calculations.",
+                  "category": "Office_Supplies",
+                  "productImage": "https://i.ibb.co/6yLsfSj/Calculator.jpg",
+                  "_id": "67783fcafa41e5a1afdf5e58"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "x-api-key": "Your API Key",
+              "Cache-Control": "no-cache"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sectionTitle": "API Key",
+      "sectionDescription":"The API key is used for authenticating requests to all routes within the KeyCommerce platform. It acts as middleware, ensuring that only authorized users with a valid API key can access the protected endpoints. The API key must be included in the request headers under the Authorization field as a Bearer token. This adds an extra layer of security, protecting sensitive data and operations from unauthorized access",
+      "endpoints": [
+        {
+          "title": "Generate API Key",
+          "description": "This endpoint allows authenticated users to generate a unique API key for accessing protected resources on the KeyCommerce platform. A valid Authorization token must be included in the request headers using the Bearer authentication scheme.",
+          "method": "POST",
+          "url": "https://keycommerce-api.onrender.com/generate_api_key",
+          "apiKeyRequired": false,
+          "requestHeaders": {
+            "Authorization": "Bearer {{auth_token}}"
+          },
+          "requestBody": {
+            "example": null
+          },
+          "responses": {
+            "201": {
+              "status": "201 Created",
+              "description": "API key generated successfully.",
+              "exampleResponse": {
+                "apiKey": "fee1f50b-e0c1-4071-8e2b-5eb17e91bba1",
+                "message": "API key generated successfully for user 67783eb3fa41e5a1afdf5e4c"
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Invalid or missing Authorization token."
+            }
+          },
+          "responseFields": {
+            "message": "A confirmation message indicating whether the API key was successfully generated.",
+            "apiKey": "The newly generated API key required for authenticating future requests to protected resources on the KeyCommerce platform."
+          },
+          "exampleRequest": {
+            "curl": "curl --location --request POST 'https://keycommerce-api.onrender.com/generate_api_key' --header 'Authorization: Bearer {{auth_token}}'"
+          },
+          "exampleResponse": {
+            "status": "201 Created",
+            "response": "Request was successful",
+            "body": {
+              "apiKey": "fee1f50b-e0c1-4071-8e2b-5eb17e91bba1",
+              "message": "API key generated successfully for user 67783eb3fa41e5a1afdf5e4c"
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "Cache-Control": "no-cache"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "sectionTitle": "Category",
+      "sectionDescription": "This folder contains endpoints for managing product categories and retrieving products by category within the user products section. These endpoints enable users to view all categories and fetch products belonging to a specific category. It ensures efficient categorization and filtering of products for better user experience.",
+      "endpoints": [
+        {
+          "title": "Get All Categories",
+          "description": "This endpoint retrieves all available product categories, helping users explore products within a specific category. A valid API key is required for authentication to access the categories list.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/userproducts/categories",
+          "apiKeyRequired": true,
+          "requestHeaders": {
+            "x-api-key": "{{apikey}}"
+          },
+          "requestBody": {
+            "example": null
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Successfully returns the list of categories.",
+              "exampleResponse": {
+                "categories": [
+                  "Electronics",
+                  "Accessories",
+                  "Clothing",
+                  "Home & Kitchen",
+                  "Beauty & Health"
+                ]
+              }
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "categories": "A list of all available categories. This array contains names of product categories within the store."
+          },
+          "exampleRequest": {
+            "curl": "curl --location 'https://keycommerce-api.onrender.com/userproducts/categories' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": [
+              "Electronics",
+              "Office_Supplies",
+              "Clothing",
+              "Footwear",
+              "Accessories"
+            ],
+            "headers": {
+              "Content-Type": "application/json",
+              "Cache-Control": "no-cache"
+            }
+          }
+        },
+        {
+          "title": "Get Products by Category",
+          "description": "This endpoint retrieves products that belong to a specific category. The category name is provided in the request URL. A valid API key is required for authentication to access the products within the specified category.",
+          "method": "GET",
+          "url": "https://keycommerce-api.onrender.com/userproducts/{{category_name}}",
+          "apiKeyRequired": true,
+          "requestHeaders": {
+            "x-api-key": "{{apikey}}"
+          },
+          "requestParameters": {
+            "category_name": "The name of the category to filter products by (e.g., Office_Supplies)."
+          },
+          "responses": {
+            "200": {
+              "status": "200 OK",
+              "description": "Successfully returns the list of products for the specified category.",
+              "exampleResponse": {
+                "message": "Successfully retrieved all available products for the specified category.",
+                "category": "Electronics",
+                "products": [
+                  {
+                    "productId": "product_id",
+                    "name": "Product Name",
+                    "price": 49.99,
+                    "description": "Product description here.",
+                    "category": "Electronics",
+                    "productImage": "image_url",
+                    "_id": "product_id"
+                  }
+                ]
+              }
+            },
+            "404": {
+              "status": "404 Not Found",
+              "description": "No products found for the specified category."
+            },
+            "401": {
+              "status": "401 Unauthorized",
+              "description": "Missing or invalid API key."
+            }
+          },
+          "responseFields": {
+            "message": "A response message indicating the success or failure of the request.",
+            "category": "The category for which the products are retrieved.",
+            "products": "An array of products that belong to the specified category. Each product contains details like productId, name, price, description, category, productImage, and _id."
+          },
+          "exampleRequest": {
+            "curl": "curl --location 'https://keycommerce-api.onrender.com/userproducts/Electronics' --header 'x-api-key: {{apikey}}'"
+          },
+          "exampleResponse": {
+            "status": "200 OK",
+            "response": "Request was successful",
+            "body": {
+              "message": "Successfully retrieved all available products for the specified category.",
+              "category": "Electronics",
+              "products": [
+                {
+                  "productId": "product_id_1",
+                  "name": "Smartphone",
+                  "price": 499.99,
+                  "description": "Latest model of smartphone.",
+                  "category": "Electronics",
+                  "productImage": "image_url_1",
+                  "_id": "product_id_1"
+                }
+              ]
+            },
+            "headers": {
+              "Content-Type": "application/json",
+              "Cache-Control": "no-cache"
+            }
+          }
+        }
+        
+        
+        
+      ]
+    }  
+  ]
+}

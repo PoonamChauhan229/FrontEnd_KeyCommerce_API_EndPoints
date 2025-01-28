@@ -1,0 +1,18 @@
+.scrollbar-thin {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #4b5563 #1f2937; /* Thumb and track colors */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px; /* Scrollbar width */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: #4b5563; /* Scrollbar thumb color */
+    border-radius: 4px; /* Rounded corners */
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background-color: #1f2937; /* Scrollbar track color */
+  }
+  
