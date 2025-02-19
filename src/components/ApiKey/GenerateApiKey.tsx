@@ -8,13 +8,12 @@ interface Endpoint {
   method: string;
   url: string;
   apiKeyRequired: boolean;
-  requestHeaders?: {
-    "x-api-key": string;
-  };
-  responses: { [statusCode: string]: string };
-  exampleRequest: string;
-  exampleResponse: string;
+  requestHeaders: { [key: string]: string }; // Allow any headers
+  responses: { [statusCode: string]: { status: string; description: string; exampleResponse?: any } };
+  exampleRequest: any;
+  exampleResponse: any;
 }
+
 
 
 
