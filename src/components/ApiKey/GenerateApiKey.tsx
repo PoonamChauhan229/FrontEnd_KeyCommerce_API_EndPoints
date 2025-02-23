@@ -1,74 +1,122 @@
-import React from "react";
-import apiData from "../../utilis/apiData.json"; // Importing the JSON data
-import EndpointDetailsTemplate from "../StructuredTemplates/EndpointTemplate"; // Import the template
 
+import React from "react";
+import EndpointDetailsTemplate from "../StructuredTemplates/EndpointTemplate";
+import rawApiData from "../../utilis/apiData.json"; // Importing the JSON data
+
+// Define the API Response interface
+interface ApiResponse{
+  apiKey: string;
+  message: string;
+}
+// Define required headers (with optional fields)
+interface RequiredHeaders {
+  "Content-Type"?: string;
+  "x-api-key": string;
+  "Cache-Control"?: string;
+  "Authorization"?:string;
+}
+
+// Define the endpoint response interface
+interface EndpointResponse {
+  status: string,
+  description : string,
+  exampleResponse : ApiResponse
+ }
+
+// Define the endpoint interface
 interface Endpoint {
   title: string;
   description: string;
-  method: string;
+  method: "GET" | "POST" | "PUT" | "DELETE";
   url: string;
   apiKeyRequired: boolean;
-  requestHeaders: { [key: string]: string }; // Allow any headers
-  responses: { [statusCode: string]: { status: string; description: string; exampleResponse?: any } };
-  exampleRequest: any;
-  exampleResponse: any;
+  requestHeaders: RequiredHeaders;
+  responses: {
+    [index: string]: EndpointResponse;
+  };
+  responseFields:ApiResponse;
+  exampleRequest: {
+    curl: string;   
+  };
+  exampleResponse: {
+    status: string;
+    response: string;
+    body: ApiResponse;
+    headers: RequiredHeaders;
+  };
 }
 
-
-
-
+interface ApiData {
+  sections: Section[];  
+}
+// Define the section interface
 interface Section {
   sectionTitle: string;
   sectionDescription: string;
   endpoints: Endpoint[];
 }
 
-interface ApiData {
-  sections: Section[];
-  
-}
+// Ensure JSON data is properly typed
+// const apiDataTyped = apiData as ApiData;
+const apiDataTyped = rawApiData as unknown as ApiData;
 
 const GenerateApiKey: React.FC = () => {
-  // Type the imported apiData as ApiData
-  const apiDataTyped = apiData as ApiData;
+  // Ensure apiDataTyped.sections exist before proceeding
+  if (!apiDataTyped?.sections || apiDataTyped.sections.length === 0) {
+    return (
+      <div className="p-4 mt-4 bg-red-100 border border-red-400 text-red-700">
+        <p className="font-medium">Error: API documentation data is missing.</p>
+      </div>
+    );
+  }
 
-  // Find the "API Key" section in the sections array
-  const productSection = apiDataTyped.sections.find(
+  // Find the "API Key" section
+  const apiKeySection = apiDataTyped.sections.find(
     (section) => section.sectionTitle === "API Key"
   );
 
-  if (!productSection) {
-    return <p className="text-red-500">No "API Key" section found.</p>;
+  if (!apiKeySection) {
+    return (
+      <div className="p-4 mt-4 bg-red-100 border border-red-400 text-red-700">
+        <p className="font-medium">Error: API Key section not found.</p>
+      </div>
+    );
   }
 
-  // Find the "Generate API Key" endpoint within the "API Key" section
-  const getProductEndpoint = productSection.endpoints.find(
+  // Find the "Generate API Key" endpoint
+  const generateApiKeyEndpoint = apiKeySection.endpoints.find(
     (endpoint) => endpoint.title === "Generate API Key"
   );
 
-  if (!getProductEndpoint) {
-    return <p className="text-red-500">No "Generate API Key" endpoint found.</p>;
+  if (!generateApiKeyEndpoint) {
+    return (
+      <div className="p-4 mt-4 bg-red-100 border border-red-400 text-red-700">
+        <p className="font-medium">Error: Generate API Key endpoint not found.</p>
+      </div>
+    );
   }
 
-  // Ensure "x-api-key" is in the requestHeaders or provide a fallback
-  const requestHeaders = getProductEndpoint.requestHeaders["x-api-key"]
-    ? getProductEndpoint.requestHeaders
-    : { "x-api-key": "default-api-key" }; // Provide a default key if missing
+  // Ensure request headers contain required fields
+  const requestHeaders: RequiredHeaders = {
+    "Content-Type": generateApiKeyEndpoint.requestHeaders["Content-Type"] || "application/json",
+    "x-api-key": generateApiKeyEndpoint.requestHeaders["x-api-key"],
+    "Cache-Control": generateApiKeyEndpoint.requestHeaders["Cache-Control"] || "no-cache",
+  };
 
-  // Pass the endpoint details to the template component
   return (
     <EndpointDetailsTemplate
-      title={getProductEndpoint.title}
-      description={getProductEndpoint.description}
-      method={getProductEndpoint.method}
-      url={getProductEndpoint.url}
-      apiKeyRequired={getProductEndpoint.apiKeyRequired}
+      title={generateApiKeyEndpoint.title}
+      description={generateApiKeyEndpoint.description}
+      method={generateApiKeyEndpoint.method}
+      url={generateApiKeyEndpoint.url}
+      apiKeyRequired={generateApiKeyEndpoint.apiKeyRequired}
       requestHeaders={requestHeaders}
-      responses={getProductEndpoint.responses}
-      exampleRequest={getProductEndpoint.exampleRequest}
-      exampleResponse={getProductEndpoint.exampleResponse}
+      responses={generateApiKeyEndpoint.responses}
+      exampleRequest={generateApiKeyEndpoint.exampleRequest}
+      exampleResponse={generateApiKeyEndpoint.exampleResponse}
     />
   );
 };
 
 export default GenerateApiKey;
+
