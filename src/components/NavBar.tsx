@@ -3,13 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FaPiedPiperAlt } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import { FaKey } from "react-icons/fa6";
-import { SiWoocommerce } from "react-icons/si";
 import { SiPostman } from "react-icons/si";
-
-
-
-
 
 const Navbar: React.FC = () => {
   return (

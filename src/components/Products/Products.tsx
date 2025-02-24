@@ -1,10 +1,33 @@
 import React from 'react';
 import OverviewTemplate from '../StructuredTemplates/OverviewTemplate';
-import apiData from '../../utilis/apiData'; // Import data from apiData.ts
+import rawApiData from "../../utilis/apiData.json"; // Importing the JSON data
+
+// Define the endpoint interface
+interface Endpoint {
+  title: string;
+  description: string;
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  url: string;
+  apiKeyRequired: boolean;
+  borderColor: string;  
+}
+
+interface ApiData {
+  sections: Section[];  
+}
+
+// Define the section interface
+interface Section {
+  sectionTitle: string;
+  sectionDescription: string;
+  endpoints: Endpoint[];
+}
+
+const apiDataTyped = rawApiData as unknown as ApiData;
 
 const Products: React.FC = () => {
   // Filter to get only the "Products" section
-  const productSection = apiData.sections.find(section => section.sectionTitle === "Products");
+  const productSection = apiDataTyped.sections.find(section => section.sectionTitle === "Products");
 
   if (!productSection) return null; // In case there's no Products section
 
