@@ -16,7 +16,7 @@
           },
           "responses": {
             "200": {
-              "status": "200 OK :",
+              "status": "200 OK",
               "description": "Returns a list of products.",
               "exampleResponse": {
                 "name": "Product 1",
@@ -28,7 +28,7 @@
               }
             },
             "401": {
-              "status": "401 Unauthorized:",
+              "status": "401 Unauthorized",
               "description": "Missing or invalid API key."
             }
           },
@@ -254,7 +254,7 @@
           "apiKeyRequired": true,
           "borderColor": "border-blue-500",
           "requestHeaders": {
-            "x-api-key": "Your API key"
+            "x-api-key": "{{apikey}}"
           },
           "responses": {
             "200": {

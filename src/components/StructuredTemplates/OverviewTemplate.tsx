@@ -1,7 +1,7 @@
 import React from "react";
 
 // Define your props type based on the structure of the JSON data
-type Endpoint = {
+interface Endpoint {
   title: string;
   description: string;
   method: string;
@@ -11,7 +11,7 @@ type Endpoint = {
   methodColor?: string;
 };
 
-type Section = {
+interface Section{
   sectionTitle: string;
   sectionDescription: string;
   endpoints: Endpoint[];

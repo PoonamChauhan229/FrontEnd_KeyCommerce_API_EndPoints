@@ -1,31 +1,29 @@
 import React from 'react';
 import OverviewTemplate from '../StructuredTemplates/OverviewTemplate';
-import apiData from '../../utilis/apiData.json'; // Import data from apiData.json
+import rawApiData from "../../utilis/apiData.json"; // Importing the JSON data
 
-// Define the structure of a section
+// Define the endpoint interface
 interface Endpoint {
   title: string;
   description: string;
-  method: string;
+  method: "GET" | "POST" | "PUT" | "DELETE";
   url: string;
-  apiKeyRequired?: boolean;
-  borderColor: string;
-  methodColor?: string;
+  apiKeyRequired: boolean;
+  borderColor: string;  
 }
+
+interface ApiData {
+  sections: Section[];  
+}
+
+// Define the section interface
 interface Section {
   sectionTitle: string;
   sectionDescription: string;
   endpoints: Endpoint[];
 }
 
-
-// Define the structure of apiData
-interface ApiData {
-  sections: Section[];
-}
-
-// Type the imported apiData as ApiData
-const apiDataTyped = apiData as ApiData;
+const apiDataTyped = rawApiData as unknown as ApiData;
 
 const ApiKey: React.FC = () => {
   // Filter to get only the "API Key" section

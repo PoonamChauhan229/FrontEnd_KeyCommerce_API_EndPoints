@@ -1,39 +1,42 @@
 import React from "react";
 
 interface ApiResponse {
+  productId?: string;
   name?: string;
   price?: number;
   description?: string;
   category?: string;
-  productImage?: string;  
+  productImage?: string;
+  qty?: number;
+  totalPrice?: number;    
   apiKey?: string;
   message?: string;
   _id?: string;
+
+
 }
 interface RequiredHeaders {
   "Content-Type"?: string;
-  "x-api-key": string;
+  "x-api-key"?: string;
   "Cache-Control"?: string;
   "Authorization"?:string;
 }
 interface EndpointResponse {
-  status: string,
-  description : string,
-  exampleResponse : ApiResponse
- }
+  status: string;
+  description: string;
+  exampleResponse?: ApiResponse;
+}
 
 interface EndpointData {
   title: string;
   description: string;
-  method: "GET" | "POST" | "PUT" | "DELETE";
+  method: string;
   url: string;
   apiKeyRequired: boolean;
   requestHeaders?: RequiredHeaders;
-  responses: {
-    [index: string]: EndpointResponse;
-  };
+  responses: { [index: string]: EndpointResponse };
   exampleRequest: {
-    curl: string;
+    curl?: string;
   };
   exampleResponse: {
     status?: string;

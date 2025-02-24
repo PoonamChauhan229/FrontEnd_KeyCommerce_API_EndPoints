@@ -18,10 +18,10 @@ interface RequiredHeaders {
 
 // Define the endpoint response interface
 interface EndpointResponse {
-  status: string,
-  description : string,
-  exampleResponse : ApiResponse
- }
+  status: string;
+  description: string;
+  exampleResponse?: ApiResponse;
+}
 
 // Define the endpoint interface
 interface Endpoint {
@@ -31,9 +31,8 @@ interface Endpoint {
   url: string;
   apiKeyRequired: boolean;
   requestHeaders: RequiredHeaders;
-  responses: {
-    [index: string]: EndpointResponse;
-  };
+  responses: { [index: string]: EndpointResponse };
+
   responseFields:ApiResponse;
   exampleRequest: {
     curl: string;   

@@ -1,10 +1,68 @@
 import React from "react";
-import apiData from "../../utilis/apiData.json"; // Importing the JSON data
+import rawApiData from "../../utilis/apiData.json"; // Importing the JSON data
 import EndpointDetailsTemplate from "../StructuredTemplates/EndpointTemplate"; // Import the template
+
+interface ApiResponse{
+  productId: string;
+  name?: string;
+  price?: number;
+  description?: string;
+  category?: string;
+  productImage?: string;
+  qty?: number;
+  totalPrice?: number; 
+  _id: string;
+}
+// Define required headers (with optional fields)
+interface RequiredHeaders {
+  "x-api-key": string;
+}
+
+// Define the endpoint response interface
+interface EndpointResponse {
+  status: string,
+  description : string,
+  exampleResponse? : ApiResponse
+ }
+
+// Define the endpoint interface
+interface Endpoint {
+  title: string;
+  description: string;
+  method: "GET" | "POST" | "PUT" | "DELETE";
+  url: string;
+  apiKeyRequired: boolean;
+  requestHeaders: RequiredHeaders;
+  responses: {
+    [index: string]: EndpointResponse;
+  };
+  responseFields:ApiResponse;
+  exampleRequest: {
+    curl: string;   
+  };
+  exampleResponse: {
+    status: string;
+    response: string;
+    body: ApiResponse;
+    headers: RequiredHeaders;
+  };
+}
+
+interface ApiData {
+  sections: Section[];  
+}
+
+// Define the section interface
+interface Section {
+  sectionTitle: string;
+  sectionDescription: string;
+  endpoints: Endpoint[];
+}
+const apiDataTyped = rawApiData as unknown as ApiData;
 
 const AddCart: React.FC = () => {
   // Find the "Products" section in the sections array
-  const productSection = apiData.sections.find((section) => section.sectionTitle === "Cart");
+  const productSection = apiDataTyped.sections.find((section) => section.sectionTitle === "Cart");
 
   if (!productSection) {
     return <p className="text-red-500">No "Products" section found.</p>;
